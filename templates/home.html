@@ -1,0 +1,105 @@
+<form method="POST" id="quizForm">
+
+<h2 id="timer" style="
+    color:red;
+    text-align:center;
+    background:#fff3f3;
+    padding:10px;
+    border-radius:8px;
+">
+    ⏰ Time Left: 200s
+</h2>
+
+{% for q in questions %}
+
+    <div style="
+        background:white;
+        padding:15px;
+        margin-bottom:20px;
+        border-radius:10px;
+        box-shadow:0 0 10px #ccc;
+    ">
+
+    <h3>{{ q.question }}</h3>
+
+    {% set outer_loop = loop.index0 %}
+
+    {% for option in q.options %}
+
+        <label style="font-size:18px;">
+
+            <input type="radio"
+                   name="{{ outer_loop }}"
+                   value="{{ option }}">
+            
+
+            {{ option }}
+
+        </label>
+
+        <br><br>
+
+    {% endfor %}
+
+    </div>
+
+{% endfor %}
+
+<button type="submit" class="submit-btn">
+    🚀 Submit Quiz
+</button>
+
+</form>
+
+<style>
+
+.submit-btn{
+    width:100%;
+    padding:14px;
+    background:linear-gradient(45deg,#007bff,#00c6ff);
+    color:white;
+    border:none;
+    border-radius:10px;
+    font-size:20px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.submit-btn:hover{
+    transform:scale(1.02);
+}
+
+</style>
+
+<script>
+
+let timeLeft = 200;
+
+let timer = document.getElementById("timer");
+
+let quizForm = document.getElementById("quizForm");
+
+let countdown = setInterval(function(){
+
+    timeLeft--;
+
+    timer.innerHTML = "⏰ Time Left: " + timeLeft + "s";
+
+    if(timeLeft <= 10){
+        timer.style.color = "darkred";
+        timer.style.fontWeight = "bold";
+    }
+
+    if(timeLeft <= 0){
+
+        clearInterval(countdown);
+
+        alert("⏰ Time Over! Quiz Submitted");
+
+        quizForm.submit();
+    }
+
+}, 1000);
+
+</script>

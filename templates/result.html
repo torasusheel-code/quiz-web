@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Result</title>
+
+    <style>
+        body{
+            font-family:Arial;
+            text-align:center;
+            background:#f2f2f2;
+            padding-top:100px;
+        }
+
+        .result-box{
+            background:white;
+            width:400px;
+            margin:auto;
+            padding:30px;
+            border-radius:10px;
+            box-shadow:0 0 10px gray;
+        }
+
+        a{
+            text-decoration:none;
+            background:#007bff;
+            color:white;
+            padding:10px 20px;
+            border-radius:5px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="result-box">
+
+<h1>📊 Quiz Result</h1>
+
+<h2>Your Score: {{ score }}/{{ total }}</h2>
+
+<br>
+
+<a href="/">Play Again</a>
+
+</div>
+
+</body>
+</html>
