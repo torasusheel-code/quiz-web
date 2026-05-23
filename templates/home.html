@@ -1,80 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Quiz App</title>
+
+    <style>
+
+        body{
+            font-family:Arial;
+            background:#f2f2f2;
+            padding:20px;
+        }
+
+        h1{
+            text-align:center;
+            color:#333;
+        }
+
+        #timer-box{
+            position:fixed;
+            top:20px;
+            right:20px;
+            background:red;
+            color:white;
+            padding:12px 20px;
+            border-radius:10px;
+            font-size:20px;
+            font-weight:bold;
+            z-index:1000;
+            box-shadow:0 0 10px gray;
+        }
+
+        .question-box{
+            background:white;
+            padding:20px;
+            margin-bottom:20px;
+            border-radius:10px;
+            box-shadow:0 0 10px #ccc;
+        }
+
+        .question-box h3{
+            color:#222;
+        }
+
+        label{
+            font-size:18px;
+        }
+
+        .submit-btn{
+            width:100%;
+            padding:14px;
+            background:linear-gradient(45deg,#007bff,#00c6ff);
+            color:white;
+            border:none;
+            border-radius:10px;
+            font-size:20px;
+            font-weight:bold;
+            cursor:pointer;
+            transition:0.3s;
+        }
+
+        .submit-btn:hover{
+            transform:scale(1.02);
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<h1>🧠 Online Quiz</h1>
+
 <form method="POST" id="quizForm">
 
-<h2 id="timer" style="
-    color:red;
-    text-align:center;
-    background:#fff3f3;
-    padding:10px;
-    border-radius:8px;
-">
-    ⏰ Time Left: 150s
-</h2>
+    <div id="timer-box">
 
-{% for q in questions %}
-
-    <div style="
-        background:white;
-        padding:15px;
-        margin-bottom:20px;
-        border-radius:10px;
-        box-shadow:0 0 10px #ccc;
-    ">
-
-    <h3>{{ q.question }}</h3>
-
-    {% set outer_loop = loop.index0 %}
-
-    {% for option in q.options %}
-
-        <label style="font-size:18px;">
-
-            <input type="radio"
-                   name="{{ outer_loop }}"
-                   value="{{ option }}">
-            
-
-            {{ option }}
-
-        </label>
-
-        <br><br>
-
-    {% endfor %}
+        ⏰ Time Left:
+        <span id="timer">200</span>s
 
     </div>
 
-{% endfor %}
+    {% for q in questions %}
 
-<button type="submit" class="submit-btn">
-    🚀 Submit Quiz
-</button>
+        <div class="question-box">
+
+            <h3>{{ q.question }}</h3>
+
+            {% set outer_loop = loop.index0 %}
+
+            {% for option in q.options %}
+
+                <label>
+
+                    <input type="radio"
+                           name="{{ outer_loop }}"
+                           value="{{ option }}">
+
+                    {{ option }}
+
+                </label>
+
+                <br><br>
+
+            {% endfor %}
+
+        </div>
+
+    {% endfor %}
+
+    <button type="submit" class="submit-btn">
+        🚀 Submit Quiz
+    </button>
 
 </form>
 
-<style>
-
-.submit-btn{
-    width:100%;
-    padding:14px;
-    background:linear-gradient(45deg,#007bff,#00c6ff);
-    color:white;
-    border:none;
-    border-radius:10px;
-    font-size:20px;
-    font-weight:bold;
-    cursor:pointer;
-    transition:0.3s;
-}
-
-.submit-btn:hover{
-    transform:scale(1.02);
-}
-
-</style>
-
 <script>
 
-let timeLeft = 150;
+let timeLeft = 200;
 
 let timer = document.getElementById("timer");
 
@@ -84,11 +127,12 @@ let countdown = setInterval(function(){
 
     timeLeft--;
 
-    timer.innerHTML = "⏰ Time Left: " + timeLeft + "s";
+    timer.innerHTML = timeLeft;
 
     if(timeLeft <= 10){
-        timer.style.color = "darkred";
-        timer.style.fontWeight = "bold";
+
+        document.getElementById("timer-box").style.background = "darkred";
+
     }
 
     if(timeLeft <= 0){
@@ -103,3 +147,6 @@ let countdown = setInterval(function(){
 }, 1000);
 
 </script>
+
+</body>
+</html>

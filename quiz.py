@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, session
 import sqlite3
+from werkzeug.security import generate_password_hash, check_password_hash
 conn = sqlite3.connect("quiz.db")
 cursor = conn.cursor()
 
@@ -246,6 +247,32 @@ def login():
         return redirect("/quiz")
 
     return render_template("login.html")
+ADMIN_USERNAME = "susheel tora"
+ADMIN_PASSWORD = "tora@2006"
+
+@app.route("/tora-admin-2026-secret", methods=["GET", "POST"])
+def admin():
+
+    if request.method == "POST":
+
+        username = request.form["username"]
+        password = request.form["password"]
+
+        if username == ADMIN_USERNAME and password == ADMIN_PASSWORD:
+
+            session["admin"] = True
+
+            return redirect("/records")
+
+        else:
+
+            return """
+            <h2 style='color:red; text-align:center;'>
+            Wrong Admin Credentials!
+            </h2>
+            """
+
+    return render_template("admin.html")
 # Quiz Page
 @app.route("/quiz", methods=["GET", "POST"])
 def quiz():
