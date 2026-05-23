@@ -1,56 +1,89 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Login</title>
+    <title>Phone Login</title>
 
     <style>
+
         body{
             font-family:Arial;
             background:#f2f2f2;
-            text-align:center;
-            padding-top:100px;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            height:100vh;
         }
 
         .box{
             background:white;
-            width:300px;
-            margin:auto;
             padding:30px;
             border-radius:10px;
+            width:300px;
             box-shadow:0 0 10px gray;
         }
 
         input{
-            width:90%;
+            width:100%;
             padding:10px;
-            margin:10px;
+            margin-top:10px;
         }
 
         button{
-            padding:10px 20px;
+            width:100%;
+            padding:10px;
+            margin-top:15px;
             background:#007bff;
             color:white;
             border:none;
             border-radius:5px;
         }
+        .record-btn{
+    display:inline-block;
+    padding:12px 20px;
+    background:green;
+    color:white;
+    text-decoration:none;
+    border-radius:8px;
+    margin-bottom:15px;
+    font-weight:bold;
+}
+
+.record-btn:hover{
+    background:darkgreen;
+}
+
     </style>
+
 </head>
 
 <body>
 
 <div class="box">
 
-<h2>🔐 Quiz Login</h2>
+    <h2>📱 Phone Login</h2>
+    <a href="/records" class="record-btn">
+    📊 Check Records
+</a>
+<a href="/myresult" class="record-btn">
+    🏆 My Result
+</a>
 
-<form method="POST">
+    <form method="POST">
+        <input type="text"
+           name="name"
+           placeholder="Enter Name"
+           required>
 
-<input type="text" name="username" placeholder="Enter Username" required>
+        <input type="text"
+               name="phone"
+               placeholder="Enter Phone Number"
+               required>
 
-<br>
+        <button type="submit">
+            Start Quiz
+        </button>
 
-<button type="submit">Start Quiz</button>
-
-</form>
+    </form>
 
 </div>
 

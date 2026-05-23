@@ -1,5 +1,12 @@
 from flask import Flask, render_template, request, redirect, session
 import sqlite3
+conn = sqlite3.connect("quiz.db")
+cursor = conn.cursor()
+
+cursor.execute("DROP TABLE IF EXISTS records")
+
+conn.commit()
+conn.close()
 
 app = Flask(__name__)
 app.secret_key = "quizsecret"
@@ -196,41 +203,45 @@ conn = sqlite3.connect("quiz.db")
 cursor = conn.cursor()
 
 cursor.execute("""
-CREATE TABLE IF NOT EXISTS records (
+CREATE TABLE IF NOT EXISTS records(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    username TEXT,
-    score INTEGER
+    name TEXT,
+    phone TEXT UNIQUE,
+    score INTEGER,
+    attempted INTEGER DEFAULT 1
 )
 """)
-
 conn.commit()
 conn.close()
-
 # Login Page
 @app.route("/", methods=["GET", "POST"])
 def login():
 
     if request.method == "POST":
 
-        username = request.form["username"]
+        name = request.form["name"]
+        phone = request.form["phone"]
 
         conn = sqlite3.connect("quiz.db")
         cursor = conn.cursor()
 
         cursor.execute(
-            "SELECT * FROM records WHERE username=?",
-            (username,)
+            "SELECT * FROM records WHERE phone=? AND attempted=1",
+            (phone,)
         )
 
-        existing_user = cursor.fetchone()
+        existing = cursor.fetchone()
+
+        if existing:
+
+            conn.close()
+
+            return "<h2>This phone number already attempted quiz!</h2>"
+
+        session["name"] = name
+        session["phone"] = phone
 
         conn.close()
-
-        # Agar already quiz de chuka hai
-        if existing_user:
-            return "<h2>User already attempted the quiz!</h2>"
-
-        session["username"] = username
 
         return redirect("/quiz")
 
@@ -239,7 +250,7 @@ def login():
 @app.route("/quiz", methods=["GET", "POST"])
 def quiz():
 
-    if "username" not in session:
+    if "phone" not in session:
         return redirect("/")
 
     score = 0
@@ -253,12 +264,17 @@ def quiz():
             if user_answer == q["answer"]:
                 score += 1
 
+        # session data
+        name = session["name"]
+        phone = session["phone"]
+
+        # database save
         conn = sqlite3.connect("quiz.db")
         cursor = conn.cursor()
 
         cursor.execute(
-            "INSERT INTO records(username, score) VALUES(?, ?)",
-            (session["username"], score)
+            "INSERT INTO records(name, phone, score, attempted) VALUES (?, ?, ?, ?)",
+            (name, phone, score, 1)
         )
 
         conn.commit()
@@ -272,6 +288,21 @@ def quiz():
 
     return render_template("home.html", questions=questions)
 
+@app.route("/reset/<phone>")
+def reset(phone):
+
+    conn = sqlite3.connect("quiz.db")
+    cursor = conn.cursor()
+
+    cursor.execute(
+        "DELETE FROM records WHERE phone=?",
+        (phone,)
+    )
+
+    conn.commit()
+    conn.close()
+
+    return f"{phone} reset successful!"
 # Records Page
 @app.route("/records")
 def records():
@@ -286,6 +317,28 @@ def records():
     conn.close()
 
     return render_template("records.html", records=data)
+
+@app.route("/myresult")
+def myresult():
+
+    if "phone" not in session:
+        return redirect("/")
+
+    phone = session["phone"]
+
+    conn = sqlite3.connect("quiz.db")
+    cursor = conn.cursor()
+
+    cursor.execute(
+        "SELECT * FROM records WHERE phone=?",
+        (phone,)
+    )
+
+    data = cursor.fetchone()
+
+    conn.close()
+
+    return render_template("myresult.html", data=data)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
