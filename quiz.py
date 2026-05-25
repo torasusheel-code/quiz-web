@@ -15,190 +15,192 @@ app.secret_key = "quizsecret"
 questions = [
     {
         "number": 1,
-        "question": "1.The first newspaper published in India was?",
+        "question": "The first newspaper published in India was?",
         "options": ["The Hindu", "The Amrita Bazar Patrika", "The Bengal Gazette", "The Times of India"],
         "answer": "The Bengal Gazette"
     },
     {
         "number": 2,
-        "question": "2.Who was the first Home Minister of India?",
+        "question": "Who was the first Home Minister of India?",
         "options": ["Dr S. Radhakrishnan", "Lal Bahadur Shastri", "Dr.Rajendra prasad", "Sardar VallabhBhai Patel"],
         "answer": "Sardar VallabhBhai Patel"
     },
     {
         "number": 3,
-        "question": "3.Who was the first Indian to win a Nobel Prize?",
+        "question": "Who was the first Indian to win a Nobel Prize?",
         "options": ["C. V. Raman", "Rabindranath Tagore", "Mother Teresa", "sarojini Naidu"],
         "answer": "Rabindranath Tagore"
     },
     {
         "number": 4,
-        "question": "4.The first woman Governor of a state in free india was ?",
+        "question": "The first woman Governor of a state in free india was ?",
         "options": ["Sarojini Naidu", "Indira Gandhi", "Pratibha Patil", "Sucheta Kripalani"],
         "answer": "Sarojini Naidu"
     },
     {
         "number": 5,    
-        "question": "5.Which was the first satellite launched by India?",
+        "question": "Which was the first satellite launched by India?",
         "options": ["Rohini", "Aryabhata", "Bhaskara", "Kalpana-1"],
         "answer": "Aryabhata"
     },
     {
         "number": 6,
-        "question": "6.First indigenously built aircraft carrier ?",
+        "question": "First indigenously built aircraft carrier ?",
         "options": [ "INS Vikrant", "INS Viraat", "INS Arihant", "INS Chakra"],
         "answer": "INS Vikrant"
     },
     {
         "number": 7,
-        "question": "7.First Indian Olympic medal ?",
+        "question": "First Indian Olympic medal ?",
         "options": ["K. D. Jadhav", "Abhinav Bindra","Norman Pritchard", "Milkha Singh"],
         "answer": "Norman Pritchard"
     },
     {
         "number": 8, 
-         "question": "8.Who was the first indian woman to climb Mount Everest?",
+         "question": "Who was the first indian woman to climb Mount Everest?",
          "options": ["Santosh Yadav", "Bachendri Pal", "Arunima Sinha", "premlata Agrawal"],
          "answer": "Bachendri Pal"
      },
      {      "number": 9,
-            "question": "9.Gautam Buddha was born in?",
+            "question": "Gautam Buddha was born in?",
             "options": ["Lumbini", "Kushinagar", "Varanasi", "Sarnath"],
             "answer": "Lumbini"
         },
         {
             "number": 11,
-            "question": "11.Red Fort was built by?",
+            "question": "Red Fort was built by?",
             "options": ["Akbar", "Jahangir","Shah Jahan", "Shivaji"],
             "answer": "Shah Jahan"
         },
         {
             "number": 12,
-            "question": "12.largest fresh water lake in India?",
+            "question": "largest fresh water lake in India?",
             "options": [ "Dal Lake", "Chilika Lake", "Sambhar Lake","Wular Lake"],
             "answer": "Wular Lake"
         },
         {
             "number": 13,
-            "question": "13.Nageen lake is located in?",
+            "question": "Nageen lake is located in?",
             "options": [ "Himachal Pradesh","Jammu and Kashmir",  "Uttarakhand", "Punjab"],
             "answer": "Jammu and Kashmir"
         },
         {
             "number": 14,
-            "question": "14.Which is the largest river in India?",
+            "question": "Which is the largest river in India?",
             "options": ["Ganga", "Yamuna", "Brahmaputra", "Indus"],
             "answer": "Ganga"
         },
         {
             "number": 15,
-            "question": "15.Which is the largest desert in India?",
+            "question": "Which is the largest desert in India?",
             "options": ["Rann of Kutch", "Thar Desert","Great Indian Desert", "Sambhar Desert"],
             "answer": "Thar Desert"
      },
      {
         "number": 16,
-        "question": "16.How many Articles were there in the original Constitution of India?",
+        "question": "How many Articles were there in the original Constitution of India?",
         "options": ["395", "396", "397", "398"],
         "answer": "395"
      },
         {
             "number": 17,
-            "question": "17.Which Article provides the right to freedom of religion in India?",
+            "question": "Which Article provides the right to freedom of religion in India?",
             "options": ["Article 25", "Article 26", "Article 27", "Article 28"],
             "answer": "Article 25"
         },
         {
             "number": 18,
-            "question": "18.First Recipient of param Vir Chakra Award of India?",
+            "question": "First Recipient of param Vir Chakra Award of India?",
             "options": ["Captain Gurbachan Singh Salaria", "Subedar Joginder Singh", "Naik Jadunath Singh", "Major Somnath Sharma"],
             "answer": "Major Somnath Sharma"
         },
         {
             "number": 19,
-            "question": "19.Hirakud Dam is located in which state?",
+            "question": "Hirakud Dam is located in which state?",
             "options": ["Odisha", "Chhattisgarh", "Jharkhand", "Bihar"],
             "answer": "Odisha"
         },
         {
             "number": 20,
-            "question": "20.Which Range Separates North India from South India?",
+            "question": "Which Range Separates North India from South India?",
             "options": ["Aravalli Range", "Vindhya Range", "Satpura Range", "Nilgiri Hills"],
             "answer": "Vindhya Range"
         },
         {
             "number": 21,
-            "question": "21.What is the Highest peak in India?",
+            "question": "What is the Highest peak in India?",
             "options": ["Mount Everest", "K2", "Nanda Devi", "kangchenjunga"],
             "answer": "Kangchenjunga"
         },
         {
             "number": 22,
-            "question": "22.Indian National Congress was founded in?",
+            "question": "Indian National Congress was founded in?",
             "options": ["1885", "1920", "1905", "1888"],
             "answer": "1885"
          },
             {
                 "number": 23,
-                "question": "23.Who was the first man to walk on the moon?",
+                "question": "Who was the first man to walk on the moon?",
                 "options": [ "Buzz Aldrin","Neil Armstrong", "Michael Collins", "John Glenn"],
                 "answer": "Neil Armstrong"
             },
                 {
                     "number": 24,
-                    "question":"24.The spiritual capital of India is?",
+                    "question":"The spiritual capital of India is?",
                     "options": [ "Haridwar","Varanasi", "Rishikesh", "Ayodhya"],
                     "answer": "Varanasi"
                 },
                 {
                     "number": 25,
-                    "question": "25.Which City is known as the 'Electronic City of India'?",
+                    "question": "Which City is known as the 'Electronic City of India'?",
                     "options": ["Bangalore", "Hyderabad", "Chennai", "Pune"],
                     "answer": "Bangalore"
                 },
                 {               
                     "number": 26,
-                    "question": "26.Which place Receives maximum rainfall in India?",
+                    "question": "Which place Receives maximum rainfall in India?",
                     "options": [ "Cherrapunjee", "Mawsynram", "Gangtok","Shillong"],
                     "answer": "Mawsynram"
                  },
                  {
                     "number": 27,
-                    "question": "27.The Capital of South Korea is?",
+                    "question": "The Capital of South Korea is?",
                     "options": ["Pyongyang", "Busan", "Incheon", "Seoul"],
                     "answer": "Seoul"
                  },
                  {
                     "number": 28,
-                    "question": "28.What is the Capital of Andhra Pradesh?",
+                    "question": "What is the Capital of Andhra Pradesh?",
                     "options": ["Hyderabad", "Vijayawada", "Amaravati", "Visakhapatnam"],
                     "answer": "Amaravati"
                  },
                 {
                     "number": 29,
-                    "question": "29.Anand Math is anationalist Novel that inspired the song Vande mataram.Who wrote this book?",
+                    "question": "Anand Math is anationalist Novel that inspired the song Vande mataram.Who wrote this book?",
                     "options": ["Rabindranath Tagore","Bankim Chandra Chatterjee",  "Ishwar Chandra Vidyasagar", "Dinabandhu Mitra"],
                     "answer": "Bankim Chandra Chatterjee"
                 },
                  {
                     "number": 30,
-                    "question": "30.Indus river originates from?",
+                    "question": "Indus river originates from?",
                     "options": [ "Ladakh", "Uttarakhand", "Himachal Pradesh", "Tibet"],
                     "answer": "Tibet"
                 },
                 {
                     "number": 31,
-                    "question": "31.Which is the largest state in India by area?", 
+                    "question": "Which is the largest state in India by area?", 
                     "options": ["Maharashtra", "Rajasthan", "Madhya Pradesh", "Uttar Pradesh"],
                     "answer": "Rajasthan"
                 }
 
-
+              
 
 
 
 ]
+import random
 
+random.shuffle(questions)
 # Database create
 conn = sqlite3.connect("quiz.db")
 cursor = conn.cursor()
@@ -281,6 +283,8 @@ def quiz():
         return redirect("/")
 
     score = 0
+    correct = []
+    wrong = []
 
     if request.method == "POST":
 
@@ -289,13 +293,27 @@ def quiz():
             user_answer = request.form.get(str(i))
 
             if user_answer == q["answer"]:
+
                 score += 1
 
-        # session data
+                correct.append({
+                    "question": q["question"],
+                    "answer": q["answer"]
+                })
+
+            else:
+
+                wrong.append({
+                    "question": q["question"],
+                    "correct_answer": q["answer"],
+                    "your_answer": user_answer
+                })
+
+        percentage = (score / len(questions)) * 100
+
         name = session["name"]
         phone = session["phone"]
 
-        # database save
         conn = sqlite3.connect("quiz.db")
         cursor = conn.cursor()
 
@@ -310,11 +328,13 @@ def quiz():
         return render_template(
             "result.html",
             score=score,
-            total=len(questions)
+            total=len(questions),
+            percentage=percentage,
+            correct=correct,
+            wrong=wrong
         )
 
     return render_template("home.html", questions=questions)
-
 @app.route("/reset/<phone>")
 def reset(phone):
 

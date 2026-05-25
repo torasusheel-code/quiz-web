@@ -5,67 +5,119 @@
     <title>Quiz Login</title>
 
     <style>
+       body{
+    margin:0;
+    padding:0;
+    font-family:Arial;
 
-        body{
-            font-family:Arial;
-            background:#f2f2f2;
+    background-image:url("/static/bg.jpg.jpg");
+
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+
+    height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+        .main-box{
             display:flex;
-            justify-content:center;
+            flex-direction:column;
             align-items:center;
-            height:100vh;
         }
+.login-box{
+    width:350px;
+    padding:35px;
 
-        .login-box{
-            background:white;
-            padding:30px;
-            width:320px;
-            border-radius:10px;
-            box-shadow:0 0 10px gray;
-        }
+    background:rgba(255,255,255,0.2);
+
+    backdrop-filter:blur(10px);
+
+    border-radius:20px;
+
+    box-shadow:0 0 25px rgba(0,0,0,0.3);
+
+    text-align:center;
+}
+        
 
         h2{
-            text-align:center;
-            margin-bottom:20px;
+            margin-bottom:25px;
+            font-size:34px;
+            color:#222;
         }
 
         input{
             width:100%;
-            padding:12px;
-            margin-top:10px;
+            padding:14px;
+            margin-top:15px;
             border:1px solid #ccc;
-            border-radius:5px;
+            border-radius:10px;
             font-size:16px;
+            box-sizing:border-box;
+        }
+
+        input:focus{
+            outline:none;
+            border-color:#007bff;
+            box-shadow:0 0 5px #007bff;
         }
 
         button{
             width:100%;
-            padding:12px;
+            padding:14px;
             margin-top:20px;
-            background:#007bff;
+            background:linear-gradient(45deg,#007bff,#00c6ff);
             color:white;
             border:none;
-            border-radius:5px;
+            border-radius:10px;
             font-size:18px;
+            font-weight:bold;
             cursor:pointer;
+            transition:0.3s;
         }
 
         button:hover{
-            background:#0056b3;
+            transform:scale(1.03);
         }
 
         .record-btn{
             display:block;
-            text-align:center;
             margin-top:15px;
-            text-decoration:none;
-            background:#28a745;
+            padding:14px;
+            background:linear-gradient(45deg,#28a745,#5ad66f);
             color:white;
-            padding:10px;
-            border-radius:5px;
+            text-decoration:none;
+            border-radius:10px;
+            font-size:18px;
+            font-weight:bold;
+            transition:0.3s;
         }
 
         .record-btn:hover{
-            background:#1e7e34;
+            transform:scale(1.03);
+        }
+
+        .note{
+            margin-top:20px;
+            font-size:17px;
+            font-weight:bold;
+            color:#222;
+            background:white;
+            padding:12px 20px;
+            border-radius:10px;
+            box-shadow:0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .admin-link{
+            position:fixed;
+            bottom:10px;
+            right:15px;
+            color:#333;
+            text-decoration:none;
+            font-size:12px;
         }
 
     </style>
@@ -74,44 +126,49 @@
 
 <body>
 
-<div class="login-box">
+<div class="main-box">
 
-    <h2>🧠 Quiz Login</h2>
+    <div class="login-box">
 
-    <form method="POST">
+        <h2>🧠 Quiz Login</h2>
 
-        <input type="text"
-               name="name"
-               placeholder="Enter Your Name"
-               required>
+        <form method="POST">
 
-        <input type="text"
-               name="phone"
-               placeholder="Enter Phone Number"
-               required>
+            <input type="text"
+                   name="name"
+                   placeholder="Enter Your Name"
+                   required>
 
-        <button type="submit">
-            Start Quiz
-        </button>
+            <input type="text"
+                   name="phone"
+                   placeholder="Enter Phone Number"
+                   required>
 
-    </form>
+            <button type="submit">
+                🚀 Start Quiz
+            </button>
 
-    <a href="/myresult" class="record-btn">
-        🏆 My Result
-    </a>
+        </form>
+
+        <a href="/myresult" class="record-btn">
+            🏆 My Result
+        </a>
+
+    </div>
+
+    <div class="note">
+        📢 Please enter correct details before starting the quiz.
+    </div>
+    <div class="note">
+        “The purpose of this quiz is to evaluate the student's basic knowledge and understanding.”
+    </div>
 
 </div>
 
-</body>
-</html>
 <a href="/tora-admin-2026-secret"
-   style="
-   position:fixed;
-   bottom:10px;
-   right:10px;
-   font-size:12px;
-   color:gray;
-   text-decoration:none;
-   ">
+   class="admin-link">
    admin
 </a>
+
+</body>
+</html>
