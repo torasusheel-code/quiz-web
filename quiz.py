@@ -327,6 +327,7 @@ def quiz():
 
         return render_template(
             "result.html",
+            name=name,
             score=score,
             total=len(questions),
             percentage=percentage,
