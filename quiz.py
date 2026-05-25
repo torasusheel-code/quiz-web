@@ -5,7 +5,7 @@ import os
 
 DATABASE_URL = "postgresql://quizuser:RskwkZS2VhbUlbAp9yc6p4w7uV1rthKB@dpg-d8a69iml51nc73chek8g-a.oregon-postgres.render.com/quizdb_nax6"
 
-conn = psycopg2.connect(DATABASE_URL)
+conn = psycopg2.connect(DATABASE_URL)   
 
 cursor = conn.cursor()
 
