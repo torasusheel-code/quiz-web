@@ -2,20 +2,12 @@ from flask import Flask, render_template, request, redirect, session
 from werkzeug.security import generate_password_hash, check_password_hash
 import psycopg2
 import os
+
 DATABASE_URL = "postgresql://quizuser:RskwkZS2VhbUlbAp9yc6p4w7uV1rthKB@dpg-d8a69iml51nc73chek8g-a.oregon-postgres.render.com/quizdb_nax6"
 
-if DATABASE_URL:
-    conn = psycopg2.connect(DATABASE_URL)
-else:
-    conn = psycopg2.connect(
-        "postgresql://quizuser:RskwkZS2VhbUlbAp9yc6p4w7uV1rthKB@dpg-d8a69iml51nc73chek8g-a.oregon-postgres.render.com/quizdb_nax6"
-    )
+conn = psycopg2.connect(DATABASE_URL)
+
 cursor = conn.cursor()
-
-cursor.execute("DROP TABLE IF EXISTS records")
-
-conn.commit()
-conn.close()
 
 app = Flask(__name__)
 app.secret_key = "quizsecret"
@@ -215,11 +207,12 @@ random.shuffle(questions)
 conn = psycopg2.connect(DATABASE_URL)
 cursor = conn.cursor()
 
+
 cursor.execute("""
 CREATE TABLE IF NOT EXISTS records(
     id SERIAL PRIMARY KEY,
     name TEXT,
-    phone TEXT UNIQUE,
+    phone TEXT,
     score INTEGER,
     attempted INTEGER DEFAULT 1
 )
