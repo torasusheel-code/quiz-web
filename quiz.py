@@ -1,17 +1,15 @@
 from flask import Flask, render_template, request, redirect, session
-import psycopg2
 from werkzeug.security import generate_password_hash, check_password_hash
+import psycopg2
 import os
+DATABASE_URL = "postgresql://quizuser:RskwkZS2VhbUlbAp9yc6p4w7uV1rthKB@dpg-d8a69iml51nc73chek8g-a.oregon-postgres.render.com/quizdb_nax6"
 
-DATABASE_URL = os.environ.get("DATABASE_URL")
-
-conn = psycopg2.connect(DATABASE_URL)
-conn = psycopg2.connect(
-    host="localhost",
-    database="quiz",
-    user="your_username",
-    password="your_password"
-)
+if DATABASE_URL:
+    conn = psycopg2.connect(DATABASE_URL)
+else:
+    conn = psycopg2.connect(
+        "postgresql://quizuser:RskwkZS2VhbUlbAp9yc6p4w7uV1rthKB@dpg-d8a69iml51nc73chek8g-a.oregon-postgres.render.com/quizdb_nax6"
+    )
 cursor = conn.cursor()
 
 cursor.execute("DROP TABLE IF EXISTS records")
@@ -211,22 +209,27 @@ questions = [
 import random
 
 random.shuffle(questions)
-# Database create
-conn = sqlite3.connect("quiz.db")
+
+# ================= DATABASE =================
+
+conn = psycopg2.connect(DATABASE_URL)
 cursor = conn.cursor()
 
 cursor.execute("""
 CREATE TABLE IF NOT EXISTS records(
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id SERIAL PRIMARY KEY,
     name TEXT,
     phone TEXT UNIQUE,
     score INTEGER,
     attempted INTEGER DEFAULT 1
 )
 """)
+
 conn.commit()
 conn.close()
-# Login Page
+
+# ================= LOGIN PAGE =================
+
 @app.route("/", methods=["GET", "POST"])
 def login():
 
@@ -235,11 +238,11 @@ def login():
         name = request.form["name"]
         phone = request.form["phone"]
 
-        conn = sqlite3.connect("quiz.db")
+        conn = psycopg2.connect(DATABASE_URL)
         cursor = conn.cursor()
 
         cursor.execute(
-            "SELECT * FROM records WHERE phone=? AND attempted=1",
+            "SELECT * FROM records WHERE phone=%s AND attempted=1",
             (phone,)
         )
 
@@ -249,7 +252,11 @@ def login():
 
             conn.close()
 
-            return "<h2>This phone number already attempted quiz!</h2>"
+            return """
+            <h2 style='color:red; text-align:center;'>
+            This phone number already attempted quiz!
+            </h2>
+            """
 
         session["name"] = name
         session["phone"] = phone
@@ -259,6 +266,9 @@ def login():
         return redirect("/quiz")
 
     return render_template("login.html")
+
+# ================= ADMIN =================
+
 ADMIN_USERNAME = "susheel tora"
 ADMIN_PASSWORD = "tora@2006"
 
@@ -285,7 +295,9 @@ def admin():
             """
 
     return render_template("admin.html")
-# Quiz Page
+
+# ================= QUIZ PAGE =================
+
 @app.route("/quiz", methods=["GET", "POST"])
 def quiz():
 
@@ -324,11 +336,11 @@ def quiz():
         name = session["name"]
         phone = session["phone"]
 
-        conn = sqlite3.connect("quiz.db")
+        conn = psycopg2.connect(DATABASE_URL)
         cursor = conn.cursor()
 
         cursor.execute(
-            "INSERT INTO records(name, phone, score, attempted) VALUES (?, ?, ?, ?)",
+            "INSERT INTO records(name, phone, score, attempted) VALUES (%s, %s, %s, %s)",
             (name, phone, score, 1)
         )
 
@@ -346,14 +358,17 @@ def quiz():
         )
 
     return render_template("home.html", questions=questions)
+
+# ================= RESET =================
+
 @app.route("/reset/<phone>")
 def reset(phone):
 
-    conn = sqlite3.connect("quiz.db")
+    conn = psycopg2.connect(DATABASE_URL)
     cursor = conn.cursor()
 
     cursor.execute(
-        "DELETE FROM records WHERE phone=?",
+        "DELETE FROM records WHERE phone=%s",
         (phone,)
     )
 
@@ -361,11 +376,13 @@ def reset(phone):
     conn.close()
 
     return f"{phone} reset successful!"
-# Records Page
+
+# ================= RECORDS =================
+
 @app.route("/records")
 def records():
 
-    conn = sqlite3.connect("quiz.db")
+    conn = psycopg2.connect(DATABASE_URL)
     cursor = conn.cursor()
 
     cursor.execute("SELECT * FROM records")
@@ -376,6 +393,8 @@ def records():
 
     return render_template("records.html", records=data)
 
+# ================= MY RESULT =================
+
 @app.route("/myresult")
 def myresult():
 
@@ -384,11 +403,11 @@ def myresult():
 
     phone = session["phone"]
 
-    conn = sqlite3.connect("quiz.db")
+    conn = psycopg2.connect(DATABASE_URL)
     cursor = conn.cursor()
 
     cursor.execute(
-        "SELECT * FROM records WHERE phone=?",
+        "SELECT * FROM records WHERE phone=%s",
         (phone,)
     )
 
@@ -397,6 +416,8 @@ def myresult():
     conn.close()
 
     return render_template("myresult.html", data=data)
+
+# ================= RUN =================
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
