@@ -1,7 +1,17 @@
 from flask import Flask, render_template, request, redirect, session
-import sqlite3
+import psycopg2
 from werkzeug.security import generate_password_hash, check_password_hash
-conn = sqlite3.connect("quiz.db")
+import os
+
+DATABASE_URL = os.environ.get("DATABASE_URL")
+
+conn = psycopg2.connect(DATABASE_URL)
+conn = psycopg2.connect(
+    host="localhost",
+    database="quiz",
+    user="your_username",
+    password="your_password"
+)
 cursor = conn.cursor()
 
 cursor.execute("DROP TABLE IF EXISTS records")
